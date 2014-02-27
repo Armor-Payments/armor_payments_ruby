@@ -1,4 +1,8 @@
 require 'armor_payments'
+require 'timecop'
+require 'vcr'
+
+Timecop.safe_mode = true
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -11,4 +15,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+end
+
+VCR.configure do |c|
+  c.cassette_library_dir     = 'spec/cassettes'
+  c.hook_into                :excon
+  c.default_cassette_options = { record: :new_episodes }
+  c.configure_rspec_metadata!
 end

@@ -1,5 +1,5 @@
-require "armor_payments/version"
+require 'armor_payments/version'
+require 'armor_payments/api'
 
 module ArmorPayments
-  # Your code goes here...
 end
