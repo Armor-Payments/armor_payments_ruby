@@ -4,7 +4,7 @@ module ArmorPayments
   describe Orders do
     let(:authenticator) { Authenticator.new('my-api-key', 'my-secret-code') }
     let(:host) { 'https://sandbox.armorpayments.com' }
-    let(:orders) { Orders.new(host, authenticator, 1234) }
+    let(:orders) { Orders.new(host, authenticator, '/accounts/1234') }
 
     describe "#uri" do
       it "returns '/accounts/:aid/orders' if given no id" do
@@ -13,14 +13,6 @@ module ArmorPayments
 
       it "returns '/accounts/:aid/orders/:order_id' if given an id" do
         orders.uri(456).should == '/accounts/1234/orders/456'
-      end
-
-      it "returns '/accounts/:aid/orders/:order_id/documents/:document_id if given two params" do
-        orders.uri(456, 789).should == '/accounts/1234/orders/456/documents/789'
-      end
-
-      it "returns '/accounts/:aid/orders/:order_id/notes/:note_id if given three params" do
-        orders.uri(456, nil, 789).should == '/accounts/1234/orders/456/notes/789'
       end
     end
 
