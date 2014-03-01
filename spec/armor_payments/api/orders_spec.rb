@@ -16,24 +16,14 @@ module ArmorPayments
       end
     end
 
-    context "smoketest" do
-      describe "#all" do
-        it "queries the host for all accounts, with approprate headers" do
-          Timecop.freeze(2014, 2, 22, 12, 0, 0) do
-            orders.connection.should_receive(:get).with({
-              path: '/accounts/1234/orders',
-              headers: {
-                "X_ARMORPAYMENTS_APIKEY"            => "my-api-key",
-                "X_ARMORPAYMENTS_REQUESTTIMESTAMP"  => "2014-02-22T17:00:00Z",
-                "X_ARMORPAYMENTS_SIGNATURE"         => "fcb76e9a5ea322594ba4d636bd9653deb7cf9d9632cf67a146e4525d4055180d7e81f9d099f056aa884646ecb83f5e313cc216a21d64004b147e611e3f10257b"
-              }
-            })
-
-            orders.all
-          end
-        end
+    describe "#update" do
+      it "makes POST with the right uri and JSONified data" do
+        orders.should_receive(:request).with(
+          :post,
+          hash_including(path: '/accounts/1234/orders/90', body: '{"name":"Bobby Lee"}')
+        )
+        orders.update(90, { 'name' => 'Bobby Lee'})
       end
-
     end
 
   end

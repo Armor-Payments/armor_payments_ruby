@@ -1,6 +1,7 @@
 require 'excon'
 require 'json'
 require 'armor_payments/authenticator'
+require 'armor_payments/api/resource'
 require 'armor_payments/api/accounts'
 require 'armor_payments/api/orders'
 require 'armor_payments/api/documents'
@@ -24,7 +25,7 @@ module ArmorPayments
     end
 
     def accounts
-      @accounts ||= ArmorPayments::Accounts.new(armor_host, authenticator)
+      @accounts ||= ArmorPayments::Accounts.new(armor_host, authenticator, '')
     end
 
     def orders account_id
