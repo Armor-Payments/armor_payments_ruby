@@ -23,7 +23,7 @@ module ArmorPayments
     end
 
     def request_signature method, uri
-      Digest::SHA512.hexdigest "#{api_secret}:#{method.upcase}:#{uri}:#{current_timestamp}"
+      Digest::SHA512.hexdigest "#{api_secret}:#{method.to_s.upcase}:#{uri}:#{current_timestamp}"
     end
 
   end

@@ -22,8 +22,7 @@ module ArmorPayments
       base
     end
 
-    # On a successful request, return the JSON
-    # On an unsuccessful request, return the response object for further interrogation
+    # If possible, parse the JSON
     def request method, params
       response = connection.send(method, params)
       if response.get_header('Content-Type') =~ /json/i
