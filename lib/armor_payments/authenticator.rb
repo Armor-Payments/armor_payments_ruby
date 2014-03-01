@@ -12,9 +12,9 @@ module ArmorPayments
 
     def secure_headers method, uri
       {
-        'X_ARMORPAYMENTS_APIKEY'      => api_key,
-        'X_ARMORPAYMENTS_TIMESTAMP'   => current_timestamp,
-        'X_ARMORPAYMENTS_SIGNATURE'   => request_signature(method, uri)
+        'X_ARMORPAYMENTS_APIKEY'            => api_key,
+        'X_ARMORPAYMENTS_REQUESTTIMESTAMP'  => current_timestamp,
+        'X_ARMORPAYMENTS_SIGNATURE'         => request_signature(method, uri)
       }
     end
 

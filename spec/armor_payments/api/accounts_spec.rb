@@ -23,9 +23,9 @@ module ArmorPayments
             accounts.connection.should_receive(:get).with({
               path: '/accounts',
               headers: {
-                "X_ARMORPAYMENTS_APIKEY"    => "my-api-key",
-                "X_ARMORPAYMENTS_TIMESTAMP" => "2014-02-22T17:00:00Z",
-                "X_ARMORPAYMENTS_SIGNATURE" => "777990373678937074c1b357d632e0ea3439d0e834e573c03076ee557f526565f9ac2b38483b3e41024b96ec2644d60b4f70f0d9c760b2ebeb9827f9b335d069"
+                "X_ARMORPAYMENTS_APIKEY"            => "my-api-key",
+                "X_ARMORPAYMENTS_REQUESTTIMESTAMP"  => "2014-02-22T17:00:00Z",
+                "X_ARMORPAYMENTS_SIGNATURE"         => "777990373678937074c1b357d632e0ea3439d0e834e573c03076ee557f526565f9ac2b38483b3e41024b96ec2644d60b4f70f0d9c760b2ebeb9827f9b335d069"
               }
             })
 
