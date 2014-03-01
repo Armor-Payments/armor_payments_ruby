@@ -20,7 +20,6 @@ module ArmorPayments
 
     def all
       headers = authenticator.secure_headers 'get', uri
-      puts({path: uri, headers: headers}.inspect)
       connection.get(path: uri, headers: headers)
     end
 
