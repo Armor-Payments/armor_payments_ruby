@@ -1,6 +1,11 @@
 module ArmorPayments
   class Orders < Resource
 
+    def create data
+      headers = authenticator.secure_headers 'post', uri
+      request :post, { path: uri, headers: headers, body: JSON.generate(data) }
+    end
+    
     def update order_id, data
       headers = authenticator.secure_headers 'post', uri(order_id)
       request :post, { path: uri(order_id), headers: headers, body: JSON.generate(data) }
