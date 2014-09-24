@@ -37,7 +37,7 @@ client.users(account_id).get(user_id)
 client.orders(account_id).all
 client.orders(account_id).get(order_id)
 
-# From orders, many things chain: documents, notes, disputes
+# From orders, many things chain: documents, notes, disputes, payment instructions
 
 client.orders(account_id).documents(order_id).all
 client.orders(account_id).documents(order_id).get(document_id)
@@ -47,6 +47,8 @@ client.orders(account_id).notes(order_id).get(note_id)
 
 client.orders(account_id).disputes(order_id).all
 client.orders(account_id).disputes(order_id).get(dispute_id)
+
+client.orders(account_id).paymentinstructions(order_id).all
 
 # From disputes, further things chain: documents, notes, offers
 
@@ -76,6 +78,8 @@ Some of the resource endpoints support Create/Update `POST` operations, and this
 
 ```ruby
 client.accounts.create(your_data)
+
+client.orders(account_id).create(your_data)
 
 client.{object-path}.documents.create(your_data)
 

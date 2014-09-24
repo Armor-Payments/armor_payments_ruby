@@ -23,5 +23,9 @@ module ArmorPayments
       ArmorPayments::Disputes.new(host, authenticator, uri(order_id))
     end
 
+    def paymentinstructions order_id
+      ArmorPayments::paymentinstructions.new(host, authenticator, uri(order_id))
+    end
+
   end
 end
