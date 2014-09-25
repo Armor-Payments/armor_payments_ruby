@@ -24,7 +24,7 @@ module ArmorPayments
     end
 
     def paymentinstructions order_id
-      ArmorPayments::paymentinstructions.new(host, authenticator, uri(order_id))
+      ArmorPayments::PaymentInstructions.new(host, authenticator, uri(order_id))
     end
 
   end
