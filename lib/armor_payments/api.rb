@@ -9,6 +9,7 @@ require 'armor_payments/api/notes'
 require 'armor_payments/api/disputes'
 require 'armor_payments/api/offers'
 require 'armor_payments/api/users'
+require 'armor_payments/api/paymentinstructions'
 
 module ArmorPayments
   class API
