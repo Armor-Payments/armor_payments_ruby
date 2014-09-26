@@ -10,6 +10,7 @@ require 'armor_payments/api/disputes'
 require 'armor_payments/api/offers'
 require 'armor_payments/api/users'
 require 'armor_payments/api/paymentinstructions'
+require 'armor_payments/api/shipments'
 
 module ArmorPayments
   class API
