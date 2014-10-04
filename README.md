@@ -82,6 +82,8 @@ Some of the resource endpoints support Create/Update `POST` operations, and this
 ```ruby
 client.accounts.create(your_data)
 
+client.accounts.update(account_id, your_data)
+
 client.orders(account_id).create(your_data)
 
 client.orders(account_id).shipments(order_id).create(your_data)
