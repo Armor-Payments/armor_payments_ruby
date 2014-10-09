@@ -11,6 +11,7 @@ require 'armor_payments/api/offers'
 require 'armor_payments/api/users'
 require 'armor_payments/api/paymentinstructions'
 require 'armor_payments/api/shipments'
+require 'armor_payments/api/orderevents'
 
 module ArmorPayments
   class API

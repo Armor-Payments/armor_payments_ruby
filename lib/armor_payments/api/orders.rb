@@ -23,6 +23,10 @@ module ArmorPayments
       ArmorPayments::Disputes.new(host, authenticator, uri(order_id))
     end
 
+    def orderevents order_id
+      ArmorPayments::OrderEvents.new(host, authenticator, uri(order_id))
+    end
+
     def paymentinstructions order_id
       ArmorPayments::PaymentInstructions.new(host, authenticator, uri(order_id))
     end

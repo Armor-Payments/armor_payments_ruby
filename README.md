@@ -37,7 +37,7 @@ client.users(account_id).get(user_id)
 client.orders(account_id).all
 client.orders(account_id).get(order_id)
 
-# From orders, many things chain: documents, notes, disputes, shipments, payment instructions
+# From orders, many things chain: documents, notes, disputes, shipments, payment instructions, order events
 
 client.orders(account_id).documents(order_id).all
 client.orders(account_id).documents(order_id).get(document_id)
@@ -52,6 +52,9 @@ client.orders(account_id).shipments(order_id).all
 client.orders(account_id).shipments(order_id).get(shipment_id)
 
 client.orders(account_id).paymentinstructions(order_id).all
+
+client.orders(account_id).orderevents(order_id).all
+client.orders(account_id).orderevents(order_id).get(event_id)
 
 # From disputes, further things chain: documents, notes, offers
 
