@@ -37,6 +37,11 @@ client.users(account_id).get(user_id)
 client.orders(account_id).all
 client.orders(account_id).get(order_id)
 
+# From accounts, we chain bank accounts
+
+client.accounts.bankaccounts(account_id).all
+client.accounts.bankaccounts(account_id).get(bank_account_id)
+
 # From orders, many things chain: documents, notes, disputes, shipments, payment instructions, order events
 
 client.orders(account_id).documents(order_id).all
