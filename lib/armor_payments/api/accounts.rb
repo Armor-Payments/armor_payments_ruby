@@ -11,5 +11,9 @@ module ArmorPayments
       request :post, { path: uri(account_id), headers: headers, body: JSON.generate(data) }
     end
 
+    def bankaccounts account_id
+      ArmorPayments::BankAccounts.new(host, authenticator, uri(account_id))
+    end
+
   end
 end
