@@ -25,7 +25,7 @@ require 'armor_payments'
 
 client = ArmorPayments::API.new 'your-key', 'your-secret', should_use_sandbox
 
-# There are three top-level resources: accounts, users, and orders
+# There are four top-level resources: accounts, users, orders, and shipmentcarriers
 # Querying users and orders requires an account_id
 
 client.accounts.all
@@ -36,6 +36,9 @@ client.users(account_id).get(user_id)
 
 client.orders(account_id).all
 client.orders(account_id).get(order_id)
+
+client.shipmentcarriers.all
+client.shipmentcarriers.get(carrier_id)
 
 # From accounts, we chain bank accounts
 
@@ -63,11 +66,11 @@ client.orders(account_id).orderevents(order_id).get(event_id)
 
 # From disputes, further things chain: documents, notes, offers
 
-client.orders(account_id).disputes(order_id).documents(order_id).all
-client.orders(account_id).disputes(order_id).documents(order_id).get(document_id)
+client.orders(account_id).disputes(order_id).documents(dispute_id).all
+client.orders(account_id).disputes(order_id).documents(dispute_id).get(document_id)
 
-client.orders(account_id).disputes(order_id).notes(order_id).all
-client.orders(account_id).disputes(order_id).notes(order_id).get(note_id)
+client.orders(account_id).disputes(order_id).notes(dispute_id).all
+client.orders(account_id).disputes(order_id).notes(dispute_id).get(note_id)
 
 client.orders(account_id).disputes(order_id).offers(dispute_id).all
 client.orders(account_id).disputes(order_id).offers(dispute_id).get(offer_id)
@@ -75,14 +78,14 @@ client.orders(account_id).disputes(order_id).offers(dispute_id).get(offer_id)
 # From offers, documents and notes chain
 
 client.orders(account_id).disputes(order_id).offers(dispute_id).
-  documents(order_id).all
+  documents(offer_id).all
 client.orders(account_id).disputes(order_id).offers(dispute_id).
-  documents(order_id).get(document_id)
+  documents(offer_id).get(document_id)
 
 client.orders(account_id).disputes(order_id).offers(dispute_id).
-  notes(order_id).all
+  notes(offer_id).all
 client.orders(account_id).disputes(order_id).offers(dispute_id).
-  notes(order_id).get(note_id)
+  notes(offer_id).get(note_id)
 ```
 
 Some of the resource endpoints support Create/Update `POST` operations, and this client aims to support those as well:
