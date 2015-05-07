@@ -7,11 +7,11 @@ module ArmorPayments
     let(:users) { Users.new(host, authenticator, '/accounts/1234') }
 
     describe "#uri" do
-      it "returns '/users' if given no id" do
+      it "returns 'accounts/:aid/users' if given no id" do
         expect(users.uri).to eq '/accounts/1234/users'
       end
 
-      it "returns '/users/:id' if given an id" do
+      it "returns 'accounts/:aid/users/:id' if given an id" do
         expect(users.uri(456)).to eq '/accounts/1234/users/456'
       end
     end
