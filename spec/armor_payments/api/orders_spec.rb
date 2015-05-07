@@ -8,17 +8,17 @@ module ArmorPayments
 
     describe "#uri" do
       it "returns '/accounts/:aid/orders' if given no id" do
-        orders.uri.should == '/accounts/1234/orders'
+        expect(orders.uri).to eq '/accounts/1234/orders'
       end
 
       it "returns '/accounts/:aid/orders/:order_id' if given an id" do
-        orders.uri(456).should == '/accounts/1234/orders/456'
+        expect(orders.uri(456)).to eq '/accounts/1234/orders/456'
       end
     end
 
     describe "#update" do
       it "makes POST with the right uri and JSONified data" do
-        orders.should_receive(:request).with(
+        expect(orders).to receive(:request).with(
           :post,
           hash_including(path: '/accounts/1234/orders/90', body: '{"name":"Bobby Lee"}')
         )

@@ -10,11 +10,11 @@ module ArmorPayments
 
     describe "#uri" do
       it "returns '/%{uri_root}/resource_name' if given no id" do
-        resource.uri.should == '/wibble/123/resource'
+        expect(resource.uri).to eq '/wibble/123/resource'
       end
 
       it "returns '/%{uri_root}/resource_name/:id' if given an id" do
-        resource.uri(456).should == '/wibble/123/resource/456'
+        expect(resource.uri(456)).to eq '/wibble/123/resource/456'
       end
     end
 
@@ -23,7 +23,7 @@ module ArmorPayments
         it "returns the parsed JSON body" do
           resource.connection.stub(:get).and_return(successful_response)
           response = resource.request('get', {})
-          response.body.should == { 'whee' => 42 }
+          expect(response.body).to eq 'whee' => 42
         end
       end
 

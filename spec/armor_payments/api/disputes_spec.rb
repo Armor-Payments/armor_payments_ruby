@@ -8,11 +8,11 @@ module ArmorPayments
 
     describe "#uri" do
       it "returns '/accounts/:aid/orders/:oid/disputes' if given no id" do
-        disputes.uri.should == '/accounts/1234/orders/56/disputes'
+        expect(disputes.uri).to eq '/accounts/1234/orders/56/disputes'
       end
 
       it "returns '/accounts/:aid/disputes/:dispute_id' if given an id" do
-        disputes.uri(78).should == '/accounts/1234/orders/56/disputes/78'
+        expect(disputes.uri(78)).to eq '/accounts/1234/orders/56/disputes/78'
       end
     end
 
