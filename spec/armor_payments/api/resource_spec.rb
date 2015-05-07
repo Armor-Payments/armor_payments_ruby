@@ -40,17 +40,17 @@ module ArmorPayments
     end
 
     context "smoketest" do
-      let(:time) { Time.new(2014, 2, 22, 12, 0, 0, "+00:00") }
+      let(:given_time) { Time.new(2014, 2, 22, 12, 0, 0, "+00:00") }
 
       describe "#all" do
         it "queries the host for all of the resources, with approprate headers" do
-          Timecop.freeze(time) do
+          Timecop.freeze(given_time) do
             expect(resource.connection).to receive(:get).with({
               path: '/wibble/123/resource',
               headers: {
                 "x-armorpayments-apikey"            => "my-api-key",
                 "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
-                "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource:#{Time.now.utc.iso8601}")
+                "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource:#{given_time.utc.iso8601}")
               }
             }).and_return(successful_response)
 
@@ -61,13 +61,13 @@ module ArmorPayments
 
       describe "#get" do
         it "queries the host for a specific resource, with approprate headers" do
-          Timecop.freeze(time) do
+          Timecop.freeze(given_time) do
             expect(resource.connection).to receive(:get).with({
               path: '/wibble/123/resource/456',
               headers: {
                 "x-armorpayments-apikey"            => "my-api-key",
                 "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
-                "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource/456:#{Time.now.utc.iso8601}")
+                "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource/456:#{given_time.utc.iso8601}")
               }
             }).and_return(successful_response)
 
