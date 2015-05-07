@@ -9,7 +9,7 @@ module ArmorPayments
     describe "#create" do
 
       it "makes POST with the right uri and JSONified data" do
-        documents.should_receive(:request).with( :post, hash_including(path: '/accounts/123/orders/456/documents', body: '{"name":"Bobby Lee"}'))
+        expect(documents).to receive(:request).with( :post, hash_including(path: '/accounts/123/orders/456/documents', body: '{"name":"Bobby Lee"}'))
         documents.create({ 'name' => 'Bobby Lee'})
       end
 

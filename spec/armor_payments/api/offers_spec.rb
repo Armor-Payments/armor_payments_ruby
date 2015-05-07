@@ -8,7 +8,7 @@ module ArmorPayments
 
     describe "#update" do
       it "makes POST with the right uri and JSONified data" do
-        offers.should_receive(:request).with(
+        expect(offers).to receive(:request).with(
           :post,
           hash_including(path: '/accounts/1234/offers/90', body: '{"name":"Bobby Lee"}')
         )
