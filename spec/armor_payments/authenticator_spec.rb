@@ -45,7 +45,7 @@ module ArmorPayments
           expect(authenticator.secure_headers('get', '/accounts')).to eq({
             "x-armorpayments-apikey"            => api_key,
             "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/accounts:#{given_time.utc.iso8601}"),
-            "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z"
+            "x-armorpayments-requesttimestamp"  => given_time.utc.iso8601
           })
         end
       end

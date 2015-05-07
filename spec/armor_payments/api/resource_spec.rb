@@ -49,7 +49,7 @@ module ArmorPayments
               path: '/wibble/123/resource',
               headers: {
                 "x-armorpayments-apikey"            => "my-api-key",
-                "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
+                "x-armorpayments-requesttimestamp"  => given_time.utc.iso8601,
                 "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource:#{given_time.utc.iso8601}")
               }
             }).and_return(successful_response)
@@ -66,7 +66,7 @@ module ArmorPayments
               path: '/wibble/123/resource/456',
               headers: {
                 "x-armorpayments-apikey"            => "my-api-key",
-                "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
+                "x-armorpayments-requesttimestamp"  => given_time.utc.iso8601,
                 "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/wibble/123/resource/456:#{given_time.utc.iso8601}")
               }
             }).and_return(successful_response)
