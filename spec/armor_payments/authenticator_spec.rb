@@ -3,7 +3,9 @@ require 'armor_payments/authenticator'
 
 module ArmorPayments
   describe Authenticator do
-    let(:authenticator) { Authenticator.new('my-api-key', 'my-secret-code') }
+    let(:api_key) { 'my-api-key' }
+    let(:api_secret) { 'my-secret-code' }
+    let(:authenticator) { Authenticator.new(api_key, api_secret) }
     let(:time) { Time.new(2014, 2, 22, 12, 0, 0, "+00:00") }
 
     describe "#current_timestamp" do
@@ -26,7 +28,7 @@ module ArmorPayments
       it "returns a SHA512 hash value" do
         Timecop.freeze(time) do
           expect(authenticator.request_signature("get", "/accounts")).to eq(
-            "777990373678937074c1b357d632e0ea3439d0e834e573c03076ee557f526565f9ac2b38483b3e41024b96ec2644d60b4f70f0d9c760b2ebeb9827f9b335d069"
+            Digest::SHA512.hexdigest "#{api_secret}:GET:/accounts:#{Time.now.utc.iso8601}"
           )
         end
       end
@@ -41,8 +43,8 @@ module ArmorPayments
       it "assigns the correct value for each of the headers" do
         Timecop.freeze(time) do
           expect(authenticator.secure_headers('get', '/accounts')).to eq({
-            "x-armorpayments-apikey"            => "my-api-key",
-            "x-armorpayments-signature"         => "777990373678937074c1b357d632e0ea3439d0e834e573c03076ee557f526565f9ac2b38483b3e41024b96ec2644d60b4f70f0d9c760b2ebeb9827f9b335d069",
+            "x-armorpayments-apikey"            => api_key,
+            "x-armorpayments-signature"         => Digest::SHA512.hexdigest("#{api_secret}:GET:/accounts:#{Time.now.utc.iso8601}"),
             "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z"
           })
         end
