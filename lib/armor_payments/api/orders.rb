@@ -15,6 +15,10 @@ module ArmorPayments
       ArmorPayments::Documents.new(host, authenticator, uri(order_id))
     end
 
+    def milestones order_id
+      ArmorPayments::Milestones.new(host, authenticator, uri(order_id))
+    end
+
     def notes order_id
       ArmorPayments::Notes.new(host, authenticator, uri(order_id))
     end
