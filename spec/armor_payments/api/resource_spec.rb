@@ -32,21 +32,23 @@ module ArmorPayments
           failed_response = Excon::Response.new(status: 502, body: 'Gateway Timeout')
           resource.connection.stub(:get).and_return(failed_response)
           response = resource.request('get', {})
-          response.body.should == 'Gateway Timeout'
+          expect(response.body).to eq 'Gateway Timeout'
         end
       end
     end
 
     context "smoketest" do
+      let(:time) { Time.new(2014, 2, 22, 12, 0, 0, "+00:00") }
+
       describe "#all" do
         it "queries the host for all of the resources, with approprate headers" do
-          Timecop.freeze(2014, 2, 22, 12, 0, 0) do
-            resource.connection.should_receive(:get).with({
+          Timecop.freeze(time) do
+            expect(resource.connection).to receive(:get).with({
               path: '/wibble/123/resource',
               headers: {
-                "X_ARMORPAYMENTS_APIKEY"            => "my-api-key",
-                "X_ARMORPAYMENTS_REQUESTTIMESTAMP"  => "2014-02-22T17:00:00Z",
-                "X_ARMORPAYMENTS_SIGNATURE"         => "ec41629dc204b449c71bf89d1be4630f5353e37869197f5a926539f6fc676ebcccdb5426fb3f01a01fa7dc9551d38d152e41294a5147b15e460d09ff60cf1562"
+                "x-armorpayments-apikey"            => "my-api-key",
+                "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
+                "x-armorpayments-signature"         => "ec41629dc204b449c71bf89d1be4630f5353e37869197f5a926539f6fc676ebcccdb5426fb3f01a01fa7dc9551d38d152e41294a5147b15e460d09ff60cf1562"
               }
             }).and_return(successful_response)
 
@@ -57,13 +59,13 @@ module ArmorPayments
 
       describe "#get" do
         it "queries the host for a specific resource, with approprate headers" do
-          Timecop.freeze(2014, 2, 22, 12, 0, 0) do
-            resource.connection.should_receive(:get).with({
+          Timecop.freeze(time) do
+            expect(resource.connection).to receive(:get).with({
               path: '/wibble/123/resource/456',
               headers: {
-                "X_ARMORPAYMENTS_APIKEY"            => "my-api-key",
-                "X_ARMORPAYMENTS_REQUESTTIMESTAMP"  => "2014-02-22T17:00:00Z",
-                "X_ARMORPAYMENTS_SIGNATURE"         => "48886620cfebb95ffd9ee351f4f68d4f103a8f4bdc0e3301f7ee709ec2cf3c19588ae1b67aa8ee38305de802651fb10093cf1af40f467ac936185d551a58a844"
+                "x-armorpayments-apikey"            => "my-api-key",
+                "x-armorpayments-requesttimestamp"  => "2014-02-22T12:00:00Z",
+                "x-armorpayments-signature"         => "48886620cfebb95ffd9ee351f4f68d4f103a8f4bdc0e3301f7ee709ec2cf3c19588ae1b67aa8ee38305de802651fb10093cf1af40f467ac936185d551a58a844"
               }
             }).and_return(successful_response)
 
