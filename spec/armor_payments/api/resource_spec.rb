@@ -21,7 +21,7 @@ module ArmorPayments
     describe "#request" do
       context "on a response with a JSON body" do
         it "returns the parsed JSON body" do
-          resource.connection.stub(:get).and_return(successful_response)
+          allow(resource.connection).to receive(:get).and_return(successful_response)
           response = resource.request('get', {})
           expect(response.body).to eq 'whee' => 42
         end
@@ -30,7 +30,7 @@ module ArmorPayments
       context "on a response without JSON" do
         it "returns the full response object" do
           failed_response = Excon::Response.new(status: 502, body: 'Gateway Timeout')
-          resource.connection.stub(:get).and_return(failed_response)
+          allow(resource.connection).to receive(:get).and_return(failed_response)
           response = resource.request('get', {})
           expect(response.body).to eq 'Gateway Timeout'
         end
