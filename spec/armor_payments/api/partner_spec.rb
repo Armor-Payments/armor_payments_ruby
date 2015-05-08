@@ -12,7 +12,7 @@ module ArmorPayments
       end
 
       it "returns '/partner/:id' if given an id" do
-        expect(accounts.uri(456)).to eq '/partner/456'
+        expect(partner.uri(456)).to eq '/partner/456'
       end
     end
 
