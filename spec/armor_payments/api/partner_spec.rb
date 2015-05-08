@@ -8,7 +8,7 @@ module ArmorPayments
 
     describe "#uri" do
       it "returns '/partner' if given no id" do
-        expect(accounts.uri).to eq '/partner'
+        expect(partner.uri).to eq '/partner'
       end
 
       it "returns '/partner/:id' if given an id" do
