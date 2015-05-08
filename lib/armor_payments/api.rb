@@ -10,6 +10,7 @@ require 'armor_payments/api/milestones'
 require 'armor_payments/api/notes'
 require 'armor_payments/api/disputes'
 require 'armor_payments/api/offers'
+require 'armor_payments/api/partner'
 require 'armor_payments/api/users'
 require 'armor_payments/api/paymentinstructions'
 require 'armor_payments/api/shipmentcarriers'
@@ -37,6 +38,14 @@ module ArmorPayments
 
     def orders account_id
       ArmorPayments::Orders.new(armor_host, authenticator, accounts.uri(account_id))
+    end
+
+    def partner
+      @partner ||= ArmorPayments::Partner.new(armor_host, authenticator, '')
+    end
+
+    def shipmentcarriers
+      @shipmentcarriers ||= ArmorPayments::ShipmentCarriers.new(armor_host, authenticator, '')
     end
 
     def users account_id
