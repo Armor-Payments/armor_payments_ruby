@@ -15,5 +15,9 @@ module ArmorPayments
       ArmorPayments::BankAccounts.new(host, authenticator, uri(account_id))
     end
 
+    def users account_id
+      ArmorPayments::Users.new(host, authenticator, uri(account_id))
+    end
+
   end
 end
