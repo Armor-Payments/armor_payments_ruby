@@ -25,25 +25,34 @@ require 'armor_payments'
 
 client = ArmorPayments::API.new 'your-key', 'your-secret', should_use_sandbox
 
-# There are four top-level resources: accounts, users, orders, and shipmentcarriers
-# Querying users and orders requires an account_id
+# There are three top-level resources: accounts, partner, and shipmentcarriers
 
 client.accounts.all
 client.accounts.get(account_id)
 
+client.partner.get(partner_id)
+
+client.shipmentcarriers.all
+client.shipmentcarriers.get(carrier_id)
+
+# For convenience, orders and users can be called as top-level resources,
+# but they can also be chained from accounts
 client.users(account_id).all
 client.users(account_id).get(user_id)
 
 client.orders(account_id).all
 client.orders(account_id).get(order_id)
 
-client.shipmentcarriers.all
-client.shipmentcarriers.get(carrier_id)
-
-# From accounts, we chain bank accounts
+# From accounts, we chain bank accounts, orders, and users
 
 client.accounts.bankaccounts(account_id).all
 client.accounts.bankaccounts(account_id).get(bank_account_id)
+
+client.accounts.orders(account_id).all
+client.accounts.orders(account_id).get(order_id)
+
+client.accounts.users(account_id).all
+client.accounts.users(account_id).get(user_id)
 
 # From orders, many things chain: documents, notes, disputes, shipments, payment instructions, order events
 
@@ -86,6 +95,10 @@ client.orders(account_id).disputes(order_id).offers(dispute_id).
   notes(offer_id).all
 client.orders(account_id).disputes(order_id).offers(dispute_id).
   notes(offer_id).get(note_id)
+
+# From partner, you can chain the accounts and users associated with your partner account
+partner.accounts(partner_id).all()
+partner.users(partner_id).all()
 ```
 
 Some of the resource endpoints support Create/Update `POST` operations, and this client aims to support those as well:
@@ -96,7 +109,7 @@ client.accounts.update(account_id, your_data)
 
 client.accounts.bankaccounts(account_id).create(your_data)
 
-client.users(account_id).authentications(user_id).create(your_data)
+client.accounts.users(account_id).authentications(user_id).create(your_data)
 
 client.orders(account_id).create(your_data)
 
