@@ -6,8 +6,8 @@ require 'armor_payments/version'
 Gem::Specification.new do |spec|
   spec.name          = "armor_payments"
   spec.version       = ArmorPayments::VERSION
-  spec.authors       = ["Matt Wilson"]
-  spec.email         = ["mhw@hypomodern.com"]
+  spec.authors       = ["Matt Wilson","Mark French"]
+  spec.email         = ["mark@armorpayments.com"]
   spec.description   = 'Ruby gem for interacting with Armor Payments.'
   spec.summary       = 'Ruby gem for interacting with Armor Payments.'
   spec.homepage      = "http://github.com/hypomodern/armor_payments"
