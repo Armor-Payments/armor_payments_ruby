@@ -16,6 +16,7 @@ require 'armor_payments/api/paymentinstructions'
 require 'armor_payments/api/shipmentcarriers'
 require 'armor_payments/api/shipments'
 require 'armor_payments/api/orderevents'
+require 'armor_payments/api/orderledgers'
 require 'armor_payments/api/bankaccounts'
 
 module ArmorPayments

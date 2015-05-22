@@ -31,6 +31,10 @@ module ArmorPayments
       ArmorPayments::OrderEvents.new(host, authenticator, uri(order_id))
     end
 
+    def orderledgers order_id
+      ArmorPayments::OrderLedgers.new(host, authenticator, uri(order_id))
+    end
+
     def paymentinstructions order_id
       ArmorPayments::PaymentInstructions.new(host, authenticator, uri(order_id))
     end
