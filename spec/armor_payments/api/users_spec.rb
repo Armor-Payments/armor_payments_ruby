@@ -16,5 +16,14 @@ module ArmorPayments
       end
     end
 
+    describe "#create" do
+
+      it "makes POST with the appropriate URI and JSONified data" do
+        expect(users).to receive(:request).with( :post, hash_including(path: '/accounts/1234/users', body: '{"name":"Bobby Lee"}'))
+        users.create({ 'name' => 'Bobby Lee'})
+      end
+
+    end
+
   end
 end

@@ -109,6 +109,8 @@ client.accounts.update(account_id, your_data)
 
 client.accounts.bankaccounts(account_id).create(your_data)
 
+client.accounts.users(account_id).create(your_data)
+
 client.accounts.users(account_id).authentications(user_id).create(your_data)
 
 client.orders(account_id).create(your_data)
